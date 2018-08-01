@@ -75,7 +75,7 @@ var variable = {
 |---------+---------+------------|
 | INITIAL | click   | LOADING    |
 |         |         |            |
-| LOADING | sucess  | DISPLAY    |
+| LOADING | success | DISPLAY    |
 |         | error   | ERROR      |
 |         |         |            |
 | DISPLAY | click   | LOADING    |
@@ -90,7 +90,7 @@ var fsm = {
      "click": "LOADING"
    },
    LOADING: {
-     "sucess": "DISPLAY",
+     "success": "DISPLAY",
       "error": "ERROR"
    },
    DISPLAY: {
@@ -169,7 +169,7 @@ function getQuote(variable, currentState) {
       var quoteIndex = Math.floor(Math.random() * (max - min) + min);
 
       setQuote(variable, elements[quoteIndex]); 
-      transition(variable, currentState, "sucess");
+      transition(variable, currentState, "success");
      })
      .catch( error => {
        transition(variable, currentState, "error", error);
