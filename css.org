@@ -1,0 +1,72 @@
+#+PROPERTY: header-args :results verbatim
+
+* CSS 
+
+#+NAME: style
+#+BEGIN_SRC css :mkdirp yes :tangle  ./src/css/style.css 
+*,:after,:before{
+    box-sizing:border-box
+}
+html{
+    width:100%;
+    height:100%
+}
+body{
+    color:#000;
+    background-image:linear-gradient(90deg,hsla(0,0%,100%,0) 40px,red 0,hsla(0,0%,100%,0) 45px,hsla(0,0%,100%,0)),linear-gradient(#fff,#fff 69px,hsla(0,0%,100%,0) 70px),repeating-linear-gradient(#fff,#fff 18px,#a6ffed 19px,#fff 20px);
+    min-width:100%;
+    min-height:100%;
+    overflow:hidden
+}
+.container{
+    margin:20% auto auto
+}
+.container__text{
+    text-align:center
+}
+.container__paragraph{
+    max-width:60%;
+    height:100px;
+    margin:0 auto;
+    padding-top:5%;
+    padding-bottom:5%
+}
+.container__button{
+    margin-left:55%
+}
+button{
+    color:purple;
+    background-color:transparent;
+    border:none;
+    outline:focus
+}
+button:hover{
+    cursor:pointer
+}
+@media (min-width:600px){
+    body{
+        font-size:21px
+    }
+}
+@media (min-width:1024px){
+    body{
+        font-size:28px
+    }
+}
+@media (min-width:1760px){
+    body{
+        font-size:50px
+    }
+}
+#+END_SRC
+
+#+NAME: stylelint 
+#+BEGIN_SRC sh 
+node  node_modules/stylelint/bin/stylelint.js src/css/style.css;
+echo '';
+#+END_SRC
+ 
+
+
+
+

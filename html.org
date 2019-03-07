@@ -1,0 +1,53 @@
+#+PROPERTY: header-args :results verbatim :dir ./
+
+* index.html
+#+NAME: head
+#+BEGIN_SRC html
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <!-- prevent favicon request -->
+    <link href="data:;base64,iVBORw0KGgo=" rel="icon" />
+    <title>Random Quote Machine</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+#+END_SRC
+
+#+NAME:  container
+#+BEGIN_SRC html
+  <div id="container" class="container">
+    <div id="text" class="container__text">
+      <p id="paragraph" class="container__paragraph" ></p>
+      <div class="container__button">
+      <button id="buttonGetQuote" >Get Quote</button>
+    </div>
+    </div> 
+  </div>
+#+END_SRC
+
+
+#+NAME: scripts
+#+BEGIN_SRC html
+   <script src="js/index.js"></script>
+#+END_SRC
+
+#+NAME: main
+#+BEGIN_SRC html :noweb yes :mkdirp yes :tangle ./src/index.html
+<!DOCTYPE html>
+<html lang="en">
+<<head>>
+<body>
+<<container>>
+<<scripts>>
+</body>
+</html>
+#+END_SRC
+
+
+* CHECK
+
+#+NAME: check
+#+BEGIN_SRC sh :results  verbatim :dir ./src/ 
+curl -H "Content-Type: text/html; charset=utf-8" --data-binary @index.html  https://validator.w3.org/nu/?out=text  
+#+END_SRC
+

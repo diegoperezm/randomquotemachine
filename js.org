@@ -1,4 +1,8 @@
+#+PROPERTY: header-args :results verbatim :dir ./src/js/ :cache yes
 
+* JS 
+#+NAME:variable
+#+BEGIN_SRC js
 var variable = {
  divText: document.getElementById("text"),
  paragraph : document.getElementById("paragraph"),
@@ -10,21 +14,11 @@ var variable = {
   "I looked at you as it fell And now you're in my way."
 ]
 };
+#+END_SRC
 
 
-/*
-| state   | input   | next state |
-|---------+---------+------------|
-| INITIAL | click   | LOADING    |
-|         |         |            |
-| LOADING | sucess  | DISPLAY    |
-|         | error   | ERROR      |
-|         |         |            |
-| DISPLAY | click   | LOADING    |
-|         |         |            |
-| ERROR   | click   | LOADING    |
-*/
-
+#+NAME:fsm
+#+BEGIN_SRC js
 var fsm = {
  currentState: "INITIAL",
   states: {
@@ -43,8 +37,11 @@ var fsm = {
    },
   }
 }; 
+#+END_SRC
 
 
+#+NAME: quotegenerator
+#+BEGIN_SRC js
 var quoteGenerator =  {
 
   currentQuote : "",
@@ -61,8 +58,11 @@ var quoteGenerator =  {
       transition(variable, currentState, "click");});
   }
 };
+#+END_SRC
 
 
+#+NAME:transition
+#+BEGIN_SRC js
 /**
  * @param {Oject}              variable - Data and DOM elements
  * @param {String}         currentState  
@@ -91,8 +91,11 @@ function transition ( variable, currentState, action, error) {
    } 
  }
 }
+#+END_SRC
 
 
+#+NAME:getquote
+#+BEGIN_SRC js
 /**
  * @param {Object}     variable - Data and DOM elements 
  * @param {String} currentState 
@@ -111,9 +114,10 @@ function getQuote(variable, currentState) {
        transition(variable, currentState, "error", error);
     });
 }
+#+END_SRC
 
-
-
+#+NAME:setquote
+#+BEGIN_SRC js
 /**
  * @param  {Object}       variable - Data and DOM elements  
  * @param  {String}          quote - A quote 
@@ -129,8 +133,10 @@ function setQuote(variable, quote) {
  quoteGenerator.currentQuote = quote;
  quoteGenerator.currentNumber += 1 ;
 }
+#+END_SRC
 
-
+#+NAME:addquotetopage
+#+BEGIN_SRC js
 /**
  * @param {Object}     variable  -  Data and DOM elements  
  * @description     side effects -  Modify  a DOM element 
@@ -139,8 +145,32 @@ function addQuoteToPage(variable) {
  var paragraph = variable.paragraph;  
  paragraph.textContent = quoteGenerator.currentQuote; 
 }
+#+END_SRC
 
+#+NAME: adderrortopage
+#+BEGIN_SRC js
+/**
+ * @param {Object}           variable - Data and DOM elements 
+ * @param {Object|String}    error -  
+ */
+function addErrorToPage(variable, error) {
+ var paragraph = variable.paragraph;  
+ paragraph.textContent = error;
+}
+#+END_SRC
 
+#+NAME:displayquote
+#+BEGIN_SRC js
+/**
+ * @param {Object} variable - Data and DOM elements 
+ */
+function displayQuote(variable) {
+    addQuoteToPage(variable);
+}
+#+END_SRC
+
+#+NAME:displayerror
+#+BEGIN_SRC js
 /**
  * @param {Object}          variable - Data and DOM elements 
  * @param {String}      currentState 
@@ -154,26 +184,69 @@ function displayError(variable, currentState, action, error) {
 
     addErrorToPage(variable, error);
 }
+#+END_SRC
 
 
-/**
- * @param {Object} variable - Data and DOM elements 
- */
-function displayQuote(variable) {
-    addQuoteToPage(variable);
-}
+#+NAME: main
 
+#+BEGIN_SRC js :noweb yes :mkdirp yes  :tangle ./src/js/index.js :cache yes
 
-/**
- * @param {Object}           variable - Data and DOM elements 
- * @param {Object|String}    error -  
- */
-function addErrorToPage(variable, error) {
- var paragraph = variable.paragraph;  
- paragraph.textContent = error;
-}
+<<variable>>
 
+/*
+| state   | input   | next state |
+|---------+---------+------------|
+| INITIAL | click   | LOADING    |
+|         |         |            |
+| LOADING | sucess  | DISPLAY    |
+|         | error   | ERROR      |
+|         |         |            |
+| DISPLAY | click   | LOADING    |
+|         |         |            |
+| ERROR   | click   | LOADING    |
+*/
+
+<<fsm>>
+
+<<quotegenerator>>
+
+<<transition>>
+
+<<getquote>>
+
+<<setquote>>
+
+<<addquotetopage>>
+
+<<displayerror>>
+
+<<displayquote>>
+
+<<adderrortopage>>
 
 quoteGenerator.start(variable, fsm.currentState);
+#+END_SRC
+
+
+* check
+
+#+NAME: check
+#+BEGIN_SRC sh 
+jshint index.js;
+echo '';
+#+END_SRC
+
+
+* prettier
+
+#+NAME: prettier
+#+BEGIN_SRC  sh :exports none   :dir ./src/js/
+npm run prettier;
+#+END_SRC
+
+
+
+
+
 
 

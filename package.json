@@ -1,0 +1,35 @@
+{
+  "name": "roguelike",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "server": "gulp server",
+    "prettier": "gulp prettier",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegoperezm/roguelike.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0",
+    "gulp-prettier": "2.0.0",
+    "jsdom": "13.0.0",
+    "sinon": "5.0.7",
+    "stylelint": "^9.10.1",
+    "stylelint-config-standard": "^18.2.0",
+    "tape": "4.9.1"
+  },
+  "bugs": {
+    "url": "https://github.com/diegoperezm/roguelike/issues"
+  },
+  "homepage": "https://github.com/diegoperezm/roguelike#readme"
+}
