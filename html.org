@@ -1,6 +1,9 @@
 #+PROPERTY: header-args :results verbatim :dir ./
 
 * index.html
+
+** head
+
 #+NAME: head
 #+BEGIN_SRC html
 <head>
@@ -28,7 +31,13 @@
 
 #+NAME: scripts
 #+BEGIN_SRC html
-   <script src="js/index.js"></script>
+       <script src="https://unpkg.com/xstate@4/dist/xstate.js"></script>
+       <script src="https://unpkg.com/xstate@4/dist/xstate.interpreter.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script> <!--       <script src="./js/TweenMax.min.js"></script> -->
+       <script src="./js/index.js"></script>
+#+END_SRC
+
+
 #+END_SRC
 
 #+NAME: main
